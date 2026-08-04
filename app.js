@@ -206,9 +206,9 @@ function initExtraFeatures() {
 `BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
-SUMMARY:حفل زفاف [اسم العروس] و [اسم العريس]
+SUMMARY:حفل زفاف آية و كريم
 DESCRIPTION:انضموا إلينا لمشاركتنا فرحتنا!
-LOCATION:[اسم القاعة]
+LOCATION:قاعة ملك
 DTSTART:20261231T170000Z
 DTEND:20261231T230000Z
 END:VEVENT
