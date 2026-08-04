@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف ملكية | آية وكريم</title>
+    <meta name="description" content="يتشرف كريم وآية بدعوتكم لمشاركتهم فرحتهم في حفل زفافهما المبارك">
+
+    <!-- خطوط عربية ملكية من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- مكتبة احتفالية Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- ✅ صح -->
+    <img src="images/bg.jpg" alt="Background">
+    
+</head>
+<body>
+
+    <!-- 0. شاشة التحميل الملكية -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="royal-crest">
+                <span class="crest-leaf">✤</span>
+                <h1 class="loader-monogram">ك & آ</h1>
+                <span class="crest-leaf">✤</span>
+            </div>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- زر التحكم بالموسيقى -->
+    <button id="audio-toggle" class="floating-audio-btn" aria-label="تشغيل الموسيقى">
+        <i class="fas fa-music"></i>
+    </button>
+    <audio id="bg-music" loop src="assets/music/romantic-bg.mp3"></audio>
+
+    <!-- الشريط العلوي (Navigation) -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">ك <span class="gold-amp">&</span> آ</div>
+        <ul class="nav-links">
+            <li><a href="#hero">الرئيسية</a></li>
+            <li><a href="#details">التفاصيل</a></li>
+            <li><a href="#schedule">البرنامج</a></li>
+            <li><a href="#rsvp">تأكيد الحضور</a></li>
+        </ul>
+    </nav>
+
+    <!-- 1. واجهة الدعوة (Hero Section) -->
+    <section id="hero" class="hero">
+        <div class="royal-frame"></div> <!-- إطار ملكي خارجي -->
+        <div class="hero-overlay"></div>
+        <div class="hero-content fade-in">
+            <div class="bismillah">بسم الله الرحمن الرحيم</div>
+            <p class="subtitle-top">ببالغ السرور ووافر الإعزاز نتشرف بدعوتكم لحضور حفل زفاف</p>
+            <h1 class="couple-names">كريم <span class="ampersand">&</span> آية</h1>
+            <p class="hero-date">الجمعة، 9 أكتوبر 2026م</p>
+            <p class="hero-tagline">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</p>
+            <div class="hero-actions">
+                <a href="#rsvp" class="btn btn-primary btn-royal">تأكيد الحضور</a>
+                <button id="add-to-calendar" class="btn btn-secondary btn-royal-outline"><i class="far fa-calendar-plus"></i> إضافة للتقويم</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. العداد التنازلي -->
+    <section id="countdown" class="section countdown-section">
+        <div class="container">
+            <div class="countdown-title">المتبقي على يومنا المميز</div>
+            <div class="countdown-grid">
+                <div class="time-box"><span id="days">00</span><label>يوم</label></div>
+                <div class="time-box"><span id="hours">00</span><label>ساعة</label></div>
+                <div class="time-box"><span id="minutes">00</span><label>دقيقة</label></div>
+                <div class="time-box"><span id="seconds">00</span><label>ثانية</label></div>
+            </div>
+        </div>
+    </section>
+
+<!-- 3. تفاصيل الحفل -->
+    <section id="details" class="section details-section">
+        <div class="container">
+            <h2 class="section-title">تفاصيل المناسبة</h2>
+            <div class="gold-divider"><span>✤</span></div>
+            
+            <div class="cards-grid">
+                <!-- بطاقة التاريخ -->
+                <div class="card reveal">
+                    <div class="card-icon-wrapper">
+                        <i class="far fa-calendar-alt card-icon"></i>
+                    </div>
+                    <h3>التاريخ</h3>
+                    <p class="card-text-highlight">الجمعة، 9 أكتوبر 2026م</p>
+                    <p class="card-subtext">الموافق 28 ربيع الآخر 1448هـ</p>
+                </div>
+
+                <!-- بطاقة الوقت -->
+                <div class="card reveal">
+                    <div class="card-icon-wrapper">
+                        <i class="far fa-clock card-icon"></i>
+                    </div>
+                    <h3>الوقت</h3>
+                    <p class="card-text-highlight">من الساعة 7:00 مساءً</p>
+                    <p class="card-subtext">وحتى الساعة 11:00 مساءً</p>
+                </div>
+
+                <!-- بطاقة المكان -->
+                <div class="card reveal">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-map-marker-alt card-icon"></i>
+                    </div>
+                    <h3>المكان</h3>
+                    <p class="card-text-highlight"><strong>فيلا ملك (Villa Malak)</strong></p>
+                    <p class="venue-address">طريق سقارة السياحي، الحرانية، أبو النمرس، الجيزة</p>
+                    <a href="https://maps.app.goo.gl/3s2B4K7LtN2zEWfr8" target="_blank" class="btn-link">
+                        عرض الموقع على الخريطة <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+
+                <!-- بطاقة زي الحفل -->
+                <div class="card reveal">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-user-tie card-icon"></i>
+                    </div>
+                    <h3>زي الحفل</h3>
+                    <p class="card-text-highlight"><strong>رسمي فاخر (Black Tie)</strong></p>
+                    <p class="card-subtext">يسعدنا حضوركم بأبهى حلة لتكتمل فرحتنا</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 4. برنامج الحفل (Schedule) -->
+    <section id="schedule" class="section schedule-section">
+        <div class="container">
+            <h2 class="section-title">برنامج الحفل</h2>
+            <div class="gold-divider"><span>✤</span></div>
+            <div class="royal-schedule-container">
+                <div class="schedule-card reveal">
+                    <div class="schedule-time-badge">07:00 مساءً</div>
+                    <div class="schedule-info">
+                        <h4>بدء مراسم الزفاف واستقبال الضيوف</h4>
+                        <p><i class="fas fa-tree"></i> الحديقة الرئيسية - فيلا ملك</p>
+                    </div>
+                </div>
+                <div class="schedule-card reveal">
+                    <div class="schedule-time-badge">11:00 مساءً</div>
+                    <div class="schedule-info">
+                        <h4>ختام الحفل</h4>
+                        <p><i class="fas fa-heart"></i> نشكركم على مشاركتنا أجمل لحظات حياتنا</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. ملاحظة خاصة بالمناسبة (Protocol Note) -->
+    <section class="section note-section">
+        <div class="container">
+            <div class="royal-note-box reveal">
+                <i class="fas fa-camera-retro note-icon"></i>
+                <p>مشاركتكم لنا هي أجمل هدية، ولأننا نحب أن تتفرغوا للاستمتاع معنا، نتمنى منكم مشاركتنا لحظات الفرح بكل حُب.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. تأكيد الحضور (RSVP) -->
+    <section id="rsvp" class="section rsvp-section">
+        <div class="container">
+            <h2 class="section-title">تأكيد الحضور</h2>
+            <p class="rsvp-subtitle">يسعدنا تأكيد حضوركم الشريف 2026</p>
+            <div class="gold-divider"><span>✤</span></div>
+            
+            <form id="rsvp-form" class="rsvp-form reveal">
+                <div class="form-group">
+                    <input type="text" id="guest-name" required placeholder=" ">
+                    <label for="guest-name">الاسم الكريم</label>
+                </div>
+                <div class="form-group">
+                    <select id="guest-count" required>
+                        <option value="" disabled selected hidden></option>
+                        <option value="1">شخص واحد</option>
+                        <option value="2">شخصان</option>
+                        <option value="3+">عائلة / مجموعة (3+)</option>
+                    </select>
+                    <label for="guest-count">عدد المرافقين</label>
+                </div>
+                <div class="form-group">
+                    <select id="attendance" required>
+                        <option value="" disabled selected hidden></option>
+                        <option value="Yes">يشرفني الحضور بكل سرور</option>
+                        <option value="No">أعتذر بشدة لعدم الاستطاعة</option>
+                    </select>
+                    <label for="attendance">هل ستحضر؟</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" rows="3" placeholder=" "></textarea>
+                    <label for="message">تهنئة أو كلمة للعروسين</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-royal">إرسال التأكيد</button>
+                <div id="form-status" class="form-status"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- 7. التواصل والروابط -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <h2 class="section-title">للاستفسارات والتواصل</h2>
+            <div class="gold-divider"><span>✤</span></div>
+            <div class="contact-buttons">
+                <a href="https://wa.me/" target="_blank" class="btn btn-secondary btn-royal-outline"><i class="fab fa-whatsapp"></i> تواصل عبر الواتساب</a>
+                <button id="copy-link-btn" class="btn btn-secondary btn-royal-outline"><i class="far fa-copy"></i> نسخ رابط الدعوة</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. التذييل الملكي (Footer) -->
+    <footer class="footer">
+        <div class="footer-crest">ك & آ</div>
+        <p class="footer-names">كريم & آية</p>
+        <p class="footer-thankyou">دمتم ودامت دياركم عامرة بالأفراح والمسرّات.</p>
+    </footer>
+
+    <!-- زر الصعود للأعلى -->
+    <button id="scroll-top" class="scroll-top-btn" aria-label="الصعود للأعلى"><i class="fas fa-chevron-up"></i></button>
+
+    <script src="app.js"></script>
+</body>
+</html>

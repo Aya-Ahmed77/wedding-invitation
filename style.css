@@ -1,0 +1,671 @@
+/* ==========================================================================
+   لوحة الألوان الملكية والخطوط (Royal Palette)
+   ========================================================================== */
+:root {
+    --bg-primary: #FAF9F5;       /* عاجي ملكي عالي النقاء */
+    --bg-secondary: #F3EFE6;     /* بيج ناعم فاخر */
+    --accent-gold: #C5A059;      /* ذهبي شامبين كلاسيكي */
+    --accent-gold-dark: #A47E3B;
+    --accent-gold-light: #E8D7B8;
+    --text-dark: #222222;        /* أسود ملكي فاحم */
+    --text-muted: #555555;
+    --white: #FFFFFF;
+    
+    --font-heading: 'Amiri', 'Aref Ruqaa', serif;
+    --font-body: 'Tajawal', sans-serif;
+    
+    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-dark);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.8;
+    overflow-x: hidden;
+    direction: rtl;
+    text-align: right;
+}
+
+/* ==========================================================================
+   شاشة التحميل (Royal Loader)
+   ========================================================================== */
+#loader {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-primary);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.royal-crest {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.crest-leaf {
+    color: var(--accent-gold);
+    font-size: 1.2rem;
+}
+
+.loader-monogram {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--accent-gold);
+}
+
+.spinner {
+    width: 35px;
+    height: 35px;
+    border: 2px solid var(--accent-gold-light);
+    border-top-color: var(--accent-gold);
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   العناوين والفاصل الذهبي (Gold Dividers)
+   ========================================================================== */
+.section {
+    padding: 90px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 3.2rem;
+    color: var(--text-dark);
+}
+
+.gold-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px auto 40px auto;
+}
+
+.gold-divider::before,
+.gold-divider::after {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+}
+
+.gold-divider span {
+    color: var(--accent-gold);
+    padding: 0 10px;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   الأزرار الملكية (Royal Buttons)
+   ========================================================================== */
+.btn {
+    display: inline-block;
+    padding: 14px 35px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.btn-royal {
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+    color: var(--white);
+    border: none;
+    box-shadow: 0 4px 15px rgba(197, 160, 89, 0.25);
+}
+
+.btn-royal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+}
+
+.btn-royal-outline {
+    background: transparent;
+    color: var(--text-dark);
+    border: 1px solid var(--accent-gold);
+}
+
+.btn-royal-outline:hover {
+    background: var(--accent-gold);
+    color: var(--white);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-link {
+    color: var(--accent-gold-dark);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+/* ==========================================================================
+   الشريط العلوي (Navbar)
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    z-index: 1000;
+    transition: var(--transition-smooth);
+}
+
+.navbar.scrolled {
+    background: rgba(250, 249, 245, 0.96);
+    backdrop-filter: blur(8px);
+    padding: 12px 50px;
+    box-shadow: 0 2px 25px rgba(0, 0, 0, 0.04);
+}
+
+.nav-brand {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--accent-gold);
+}
+
+.gold-amp {
+    font-size: 1.5rem;
+    color: var(--accent-gold-dark);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   الواجهة الرئيسية (Hero Section)
+   ========================================================================== */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* جربي المسار بـ ../ */
+    background-image: url('assets/images/hero-bg.jpg') !important;
+    background-position: center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    text-align: center;
+    color: var(--white);
+}
+/* إطار ملكي ذهبي يحيط بالصفحة */
+.royal-frame {
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(232, 215, 184, 0.4);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.45) 0%,
+        rgba(0, 0, 0, 0.55) 50%,
+        rgba(0, 0, 0, 0.70) 100%
+    );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 4;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.bismillah {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--accent-gold-light);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.subtitle-top {
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.couple-names {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #FFFFFF, var(--accent-gold-light));
+    -webkit-background-clip: text;
+    background-clip: text; /* ← إضافة هذا السطر لحل التحذير وضمان التوافقية */
+    -webkit-text-fill-color: transparent;
+}
+
+.ampersand {
+    font-family: var(--font-body);
+    color: var(--accent-gold-light);
+    -webkit-text-fill-color: initial;
+}
+
+.hero-date {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    color: var(--accent-gold-light);
+}
+
+.hero-tagline {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    line-height: 1.6;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.hero-actions .btn-royal-outline {
+    color: var(--white);
+    border-color: var(--white);
+}
+
+.hero-actions .btn-royal-outline:hover {
+    background: var(--white);
+    color: var(--text-dark);
+}
+
+/* ==========================================================================
+   العداد التنازلي (Countdown)
+   ========================================================================== */
+.countdown-section {
+    background-color: var(--bg-secondary);
+    padding: 50px 20px;
+}
+
+.countdown-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--accent-gold-dark);
+    margin-bottom: 25px;
+}
+
+.countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.time-box span {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    display: block;
+    color: var(--accent-gold-dark);
+    line-height: 1;
+}
+
+.time-box label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   البطاقات والتفاصيل (Cards)
+   ========================================================================== */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: var(--white);
+    padding: 40px 20px;
+    /* تغيير لون الإطار الخفيف ليأخذ لمسة من اللون المختار، مثلاً الموكا أو الذهبي */
+    border: 1px solid #D5C7B8; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    transition: var(--transition-smooth);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    /* عند مرور الماوس يتغير اللون للذهبي الملكي الفاخر */
+    border-color: var(--accent-gold); 
+    box-shadow: 0 10px 30px rgba(197, 160, 89, 0.12);
+}
+
+.card-icon {
+    font-size: 2.2rem;
+    color: var(--accent-gold);
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+}
+
+.card-text-highlight {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--accent-gold-dark);
+}
+
+.card-subtext {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+}
+
+.venue-address {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+}
+
+/* ==========================================================================
+   برنامج الحفل (Royal Schedule Layout)
+   ========================================================================== */
+.schedule-section {
+    background-color: var(--bg-secondary);
+}
+
+.royal-schedule-container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.schedule-card {
+    background: var(--white);
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    border-right: 3px solid var(--accent-gold);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    text-align: right;
+}
+
+.schedule-time-badge {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--accent-gold-dark);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.schedule-info h4 {
+    font-size: 1.25rem;
+    color: var(--text-dark);
+}
+
+.schedule-info p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+/* ==========================================================================
+   ملاحظة المناسبة (Royal Note Box)
+   ========================================================================== */
+.note-section {
+    padding: 40px 20px;
+}
+
+.royal-note-box {
+    background: var(--white);
+    border: 1px dashed var(--accent-gold);
+    padding: 30px 40px;
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.note-icon {
+    font-size: 2rem;
+    color: var(--accent-gold);
+}
+
+.royal-note-box p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    text-align: right;
+}
+
+/* ==========================================================================
+   استمارة RSVP
+   ========================================================================== */
+.rsvp-section {
+    background-color: var(--bg-secondary);
+}
+
+.rsvp-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.rsvp-form {
+    max-width: 550px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 45px 40px;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 0;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    border: none;
+    border-bottom: 1px solid #DDD;
+    outline: none;
+    background: transparent;
+    transition: border-color 0.3s;
+}
+
+.form-group label {
+    position: absolute;
+    top: 12px;
+    right: 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: var(--transition-smooth);
+}
+
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label,
+.form-group select:focus ~ label,
+.form-group select:valid ~ label,
+.form-group textarea:focus ~ label,
+.form-group textarea:not(:placeholder-shown) ~ label {
+    top: -18px;
+    font-size: 0.75rem;
+    color: var(--accent-gold-dark);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-bottom-color: var(--accent-gold);
+}
+
+.form-status {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: var(--accent-gold-dark);
+}
+
+/* ==========================================================================
+   التواصل والفوتر الملكي
+   ========================================================================== */
+.contact-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.footer {
+    background-color: var(--text-dark);
+    color: var(--white);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.footer-crest {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+    margin-bottom: 10px;
+}
+
+.footer-names {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--accent-gold-light);
+}
+
+.footer-thankyou {
+    font-size: 0.9rem;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   الأزرار العائمة
+   ========================================================================== */
+.floating-audio-btn,
+.scroll-top-btn {
+    position: fixed;
+    bottom: 30px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1px solid var(--accent-gold);
+    color: var(--accent-gold-dark);
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: var(--transition-smooth);
+}
+
+.floating-audio-btn { right: 30px; }
+.scroll-top-btn { left: 30px; opacity: 0; pointer-events: none; }
+
+.scroll-top-btn.visible { opacity: 1; pointer-events: auto; }
+
+.floating-audio-btn:hover,
+.scroll-top-btn:hover {
+    background: var(--accent-gold);
+    color: var(--white);
+}
+
+/* ==========================================================================
+   الحركات (Animations)
+   ========================================================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition-smooth);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   التجاوب مع الشاشات (Mobile Optimization)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .navbar { padding: 15px 20px; }
+    .nav-links { display: none; }
+    .royal-frame { inset: 10px; }
+    .couple-names { font-size: 3.5rem; }
+    .countdown-grid { gap: 15px; }
+    .time-box span { font-size: 2.3rem; }
+    .schedule-card { flex-direction: column; text-align: center; }
+    .royal-note-box { flex-direction: column; text-align: center; }
+    .royal-note-box p { text-align: center; }
+    .hero-actions { flex-direction: column; }
+}
