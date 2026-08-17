@@ -21,15 +21,50 @@ try {
 /* ==========================================================================
    تهيئة الصفحة والأحداث
    ========================================================================== */
-document.addEventListener("DOMContentLoaded", () => {
-    initLoader();
-    initCountdown();
-    initScrollAnimations();
-    initAudioPlayer();
-    initLightbox();
-    initRSVPForm();
-    initExtraFeatures();
+document.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('bg-music') || document.querySelector('audio');
+    const musicBtn = document.getElementById('music-toggle'); // زر تشغيل/إيقاف الصوت إن وُجد
+
+    let hasStartedPlaying = false;
+
+    // دالة بدء تشغيل الصوت
+    function startAudioOnInteraction() {
+        if (!hasStartedPlaying && audio) {
+            audio.play().then(() => {
+                hasStartedPlaying = true;
+                if (musicBtn) {
+                    musicBtn.classList.add('playing'); // لتحديث شكل الأيقونة إذا كانت تدور مثلاً
+                }
+                // إزالة مستمعات الأحداث بعد التشغيل لأول مرة لتوفير الأداء
+                window.removeEventListener('scroll', startAudioOnInteraction);
+                window.removeEventListener('touchstart', startAudioOnInteraction);
+                window.removeEventListener('click', startAudioOnInteraction);
+            }).catch((err) => {
+                console.log('Audio autoplay prevented:', err);
+            });
+        }
+    }
+
+    // الاستماع لأول Scroll أو لمس للشاشة (Touch) على الموبايل
+    window.addEventListener('scroll', startAudioOnInteraction, { passive: true });
+    window.addEventListener('touchstart', startAudioOnInteraction, { passive: true });
+    window.addEventListener('click', startAudioOnInteraction, { passive: true });
+
+    // إمكانية كتم / تشغيل الصوت يدوياً إذا ضغط المستخدم على الزر لاحقاً
+    if (musicBtn) {
+        musicBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // منع التضارب
+            if (audio.paused) {
+                audio.play();
+                musicBtn.classList.add('playing');
+            } else {
+                audio.pause();
+                musicBtn.classList.remove('playing');
+            }
+        });
+    }
 });
+
 
 /* 0. شاشة التحميل والمؤثرات */
 function initLoader() {
